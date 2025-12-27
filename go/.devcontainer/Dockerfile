@@ -1,7 +1,7 @@
-FROM golang:1.23
+FROM golang:1.24
 
 LABEL maintainer="devcontainer-templates"
-LABEL description="Go 1.23 development environment"
+LABEL description="Go 1.24 development environment"
 
 # Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -39,14 +39,14 @@ ENV PATH="${GOPATH}/bin:${PATH}"
 ENV GO111MODULE=on
 ENV GOPROXY=https://proxy.golang.org,direct
 
-# Install Go development tools (split for better error handling)
+# Install Go development tools (pinned versions for Go 1.24 compatibility)
 RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
-RUN go install golang.org/x/tools/gopls@latest
-RUN go install github.com/cosmtrek/air@latest
+RUN go install golang.org/x/tools/gopls@v0.17.1
+RUN go install github.com/air-verse/air@v1.61.7
 RUN go install go.uber.org/mock/mockgen@latest
 RUN go install github.com/swaggo/swag/cmd/swag@latest
-RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN go install golang.org/x/tools/cmd/goimports@v0.28.0
 RUN go install github.com/fatih/gomodifytags@latest
 RUN go install github.com/cweill/gotests/gotests@latest
 

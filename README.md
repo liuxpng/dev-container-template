@@ -195,7 +195,7 @@ cp -r devcontainer-templates/python/.devcontainer /your-project/
 
 **端口**: 8000
 
-### Go 1.23
+### Go 1.24
 
 ```bash
 cp -r devcontainer-templates/go/.devcontainer /your-project/
@@ -203,7 +203,7 @@ cp -r devcontainer-templates/go/.devcontainer /your-project/
 
 | 预装工具 | 说明 |
 |---------|------|
-| Go 1.23 | 运行环境 |
+| Go 1.24 | 运行环境 |
 | golangci-lint | 代码检查 |
 | delve | 调试器 |
 | gopls | 语言服务器 |

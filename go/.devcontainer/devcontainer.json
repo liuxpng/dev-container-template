@@ -1,5 +1,5 @@
 {
-  "name": "Go 1.23",
+  "name": "Go 1.24",
 
   // Option 1: Use pre-built image (recommended, faster)
   "image": "ghcr.io/liuxpng/devcontainer-go:latest",

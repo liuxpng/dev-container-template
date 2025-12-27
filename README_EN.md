@@ -195,7 +195,7 @@ cp -r devcontainer-templates/python/.devcontainer /your-project/
 
 **Port**: 8000
 
-### Go 1.23
+### Go 1.24
 
 ```bash
 cp -r devcontainer-templates/go/.devcontainer /your-project/
@@ -203,7 +203,7 @@ cp -r devcontainer-templates/go/.devcontainer /your-project/
 
 | Pre-installed Tools | Description |
 |--------------------|-------------|
-| Go 1.23 | Runtime |
+| Go 1.24 | Runtime |
 | golangci-lint | Code linting |
 | delve | Debugger |
 | gopls | Language server |
