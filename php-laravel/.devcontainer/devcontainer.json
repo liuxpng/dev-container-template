@@ -1,0 +1,38 @@
+{
+  "name": "Laravel (PHP 8.3 + Nginx)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "onecentlin.laravel-blade",
+        "onecentlin.laravel5-snippets",
+        "codingyu.laravel-goto-view",
+        "MehediDraworworthy.php-namespace-resolver",
+        "neilbrayfield.php-docblocker",
+        "junstyle.php-cs-fixer",
+        "EditorConfig.EditorConfig"
+      ],
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "php.suggest.basic": false,
+        "intelephense.environment.phpVersion": "8.3.0",
+        "editor.formatOnSave": true,
+        "[php]": {
+          "editor.defaultFormatter": "junstyle.php-cs-fixer"
+        }
+      }
+    }
+  },
+  "forwardPorts": [80, 9003, 5173],
+  "postCreateCommand": "bash .devcontainer/init-laravel.sh",
+  "postStartCommand": "sudo service nginx start && sudo php-fpm -D",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+}
