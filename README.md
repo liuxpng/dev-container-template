@@ -52,6 +52,38 @@ code .
 
 **示例**: 启动后访问 http://localhost
 
+### Laravel (PHP 8.3 + Nginx)
+
+专为 Laravel 框架优化的开发环境。
+
+| 工具 | 版本 | 说明 |
+|------|------|------|
+| PHP | 8.3 | 带 FPM |
+| Nginx | latest | 配置指向 public/ |
+| Node.js | 20 | Vite/Mix 前端构建 |
+| Composer | latest | 包管理器 |
+| Laravel Installer | latest | Laravel 安装器 |
+| Xdebug | latest | 调试器 |
+
+**端口**: 80 (HTTP), 9003 (Xdebug), 5173 (Vite)
+
+**特性**: 空目录自动初始化 Laravel 项目
+
+**使用方法**:
+```bash
+# 创建空目录
+mkdir my-laravel-app && cd my-laravel-app
+
+# 复制配置
+cp -r /path/to/devcontainer-templates/php-laravel/.devcontainer .
+
+# 用 VS Code 打开，选择 "Reopen in Container"
+code .
+
+# 容器启动后自动创建 Laravel 项目
+# 访问 http://localhost
+```
+
 ### Python 3.12
 
 | 工具 | 版本 | 说明 |
@@ -163,13 +195,19 @@ devcontainer-templates/
 ├── .gitignore
 ├── scripts/
 │   └── install-common-tools.sh
-├── php/
+├── php/                         # 通用 PHP 环境
 │   ├── .devcontainer/
 │   │   ├── devcontainer.json
 │   │   ├── Dockerfile
 │   │   └── nginx.conf
 │   └── src/
 │       └── index.php
+├── php-laravel/                 # Laravel 专用环境
+│   └── .devcontainer/
+│       ├── devcontainer.json
+│       ├── Dockerfile
+│       ├── nginx.conf
+│       └── init-laravel.sh
 ├── python/
 │   ├── .devcontainer/
 │   │   ├── devcontainer.json
