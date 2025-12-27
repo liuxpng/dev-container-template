@@ -278,7 +278,6 @@ devcontainer-templates/
 ├── php-laravel/            # Laravel 专用
 ├── python/                 # Python
 ├── go/                     # Go
-├── scripts/                # 共享脚本
 ├── README.md
 └── LICENSE
 ```
