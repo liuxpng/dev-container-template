@@ -1,0 +1,39 @@
+{
+  "name": "Go 1.23",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "EditorConfig.EditorConfig"
+      ],
+      "settings": {
+        "go.toolsManagement.autoUpdate": true,
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "go.lintFlags": ["--fast"],
+        "go.formatTool": "goimports",
+        "go.testFlags": ["-v"],
+        "editor.formatOnSave": true,
+        "[go]": {
+          "editor.defaultFormatter": "golang.go",
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        },
+        "[go.mod]": {
+          "editor.defaultFormatter": "golang.go"
+        }
+      }
+    }
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "go mod download 2>/dev/null || true",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+}
