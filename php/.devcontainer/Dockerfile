@@ -95,5 +95,8 @@ COPY nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 80 9003
 
-# Start services
-CMD service nginx start && php-fpm
+# Create startup script
+RUN echo '#!/bin/bash\nservice nginx start\nphp-fpm' > /usr/local/bin/start.sh \
+    && chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"]

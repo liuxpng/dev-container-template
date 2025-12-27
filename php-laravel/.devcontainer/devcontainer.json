@@ -31,7 +31,7 @@
   },
   "forwardPorts": [80, 9003, 5173],
   "postCreateCommand": "bash .devcontainer/init-laravel.sh",
-  "postStartCommand": "sudo service nginx start && sudo php-fpm -D",
+  "postStartCommand": "sudo service nginx start",
   "remoteUser": "vscode",
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
