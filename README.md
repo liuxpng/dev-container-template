@@ -12,6 +12,34 @@
 
 ---
 
+## 快速开始
+
+本项目默认使用**预构建镜像**，首次启动仅需 **30-60 秒**（拉取镜像），无需本地构建。
+
+| 启动方式 | 首次耗时 | 适用场景 |
+|---------|---------|---------|
+| 预构建镜像（默认） | 30-60 秒 | 推荐，开箱即用 |
+| 本地构建 | 5-10 分钟 | 需要定制 Dockerfile |
+
+### 切换到本地构建
+
+如需自定义 Dockerfile，编辑 `.devcontainer/devcontainer.json`：
+
+```jsonc
+{
+  // 注释掉这行
+  // "image": "ghcr.io/liuxpng/devcontainer-php:latest",
+
+  // 取消注释以下内容
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  }
+}
+```
+
+---
+
 ## 使用场景
 
 ### 场景一：从零开始新项目
@@ -274,6 +302,8 @@ sudo chown -R vscode:vscode /workspace
 
 ```
 devcontainer-templates/
+├── .github/
+│   └── workflows/          # CI/CD 自动构建镜像
 ├── php/                    # 通用 PHP
 ├── php-laravel/            # Laravel 专用
 ├── python/                 # Python

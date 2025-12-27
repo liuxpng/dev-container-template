@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lsb-release \
     locales \
     sudo \
+    zsh \
     nginx \
     libpng-dev \
     libjpeg-dev \
@@ -92,20 +93,21 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m -s /bin/zsh $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
+
+# Install Oh My Zsh for vscode user
+RUN su - $USERNAME -c "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh -s -- --unattended" \
+    && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> /home/$USERNAME/.zshrc
 
 # Set working directory
 WORKDIR /workspace
 
-# Copy nginx config
-COPY nginx.conf /etc/nginx/sites-available/default
-
 EXPOSE 80 9003 5173
 
 # Create startup script
-RUN echo '#!/bin/bash\nservice nginx start\nphp-fpm' > /usr/local/bin/start.sh \
+RUN printf '%s\n' '#!/bin/bash' 'service nginx start' 'php-fpm' > /usr/local/bin/start.sh \
     && chmod +x /usr/local/bin/start.sh
 
 CMD ["/usr/local/bin/start.sh"]

@@ -1,9 +1,15 @@
 {
   "name": "PHP 8.3 + Nginx",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+
+  // Option 1: Use pre-built image (recommended, faster)
+  "image": "ghcr.io/liuxpng/devcontainer-php:latest",
+
+  // Option 2: Build locally (uncomment below, comment out "image" above)
+  // "build": {
+  //   "dockerfile": "Dockerfile",
+  //   "context": "."
+  // },
+
   "features": {},
   "customizations": {
     "vscode": {
@@ -28,7 +34,7 @@
     }
   },
   "forwardPorts": [80, 9003],
-  "postCreateCommand": "composer install --ignore-platform-reqs 2>/dev/null || true",
+  "postCreateCommand": "sudo cp .devcontainer/nginx.conf /etc/nginx/sites-available/default && composer install --ignore-platform-reqs 2>/dev/null || true",
   "postStartCommand": "sudo service nginx start && sudo php-fpm -D",
   "remoteUser": "vscode",
   "workspaceFolder": "/workspace",

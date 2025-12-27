@@ -12,6 +12,34 @@ An open-source collection of Dev Container templates providing ready-to-use deve
 
 ---
 
+## Quick Start
+
+This project uses **pre-built images** by default, requiring only **30-60 seconds** for first-time startup (pulling image), no local build needed.
+
+| Startup Method | First-time Duration | Use Case |
+|---------------|---------------------|----------|
+| Pre-built image (default) | 30-60 seconds | Recommended, ready to use |
+| Local build | 5-10 minutes | Need to customize Dockerfile |
+
+### Switch to Local Build
+
+If you need to customize the Dockerfile, edit `.devcontainer/devcontainer.json`:
+
+```jsonc
+{
+  // Comment out this line
+  // "image": "ghcr.io/liuxpng/devcontainer-php:latest",
+
+  // Uncomment the following
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  }
+}
+```
+
+---
+
 ## Usage Scenarios
 
 ### Scenario 1: Starting a New Project from Scratch
@@ -274,6 +302,8 @@ Containers don't include pre-installed databases. Recommended approaches:
 
 ```
 devcontainer-templates/
+├── .github/
+│   └── workflows/          # CI/CD auto-build images
 ├── php/                    # General PHP
 ├── php-laravel/            # Laravel specific
 ├── python/                 # Python

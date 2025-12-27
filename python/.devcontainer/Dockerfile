@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lsb-release \
     locales \
     sudo \
+    zsh \
     build-essential \
     libffi-dev \
     libssl-dev \
@@ -67,12 +68,13 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m -s /bin/zsh $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Configure PATH for user
-RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> /home/$USERNAME/.bashrc
+# Install Oh My Zsh for vscode user
+RUN su - $USERNAME -c "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh -s -- --unattended" \
+    && echo 'export PATH="$HOME/.local/bin:$PATH"' >> /home/$USERNAME/.zshrc
 
 # Set working directory
 WORKDIR /workspace

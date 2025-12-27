@@ -1,9 +1,15 @@
 {
   "name": "Laravel (PHP 8.3 + Nginx)",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+
+  // Option 1: Use pre-built image (recommended, faster)
+  "image": "ghcr.io/liuxpng/devcontainer-php-laravel:latest",
+
+  // Option 2: Build locally (uncomment below, comment out "image" above)
+  // "build": {
+  //   "dockerfile": "Dockerfile",
+  //   "context": "."
+  // },
+
   "features": {},
   "customizations": {
     "vscode": {
@@ -30,7 +36,7 @@
     }
   },
   "forwardPorts": [80, 9003, 5173],
-  "postCreateCommand": "bash .devcontainer/init-laravel.sh",
+  "postCreateCommand": "sudo cp .devcontainer/nginx.conf /etc/nginx/sites-available/default && bash .devcontainer/init-laravel.sh",
   "postStartCommand": "sudo service nginx start && sudo php-fpm -D",
   "remoteUser": "vscode",
   "workspaceFolder": "/workspace",

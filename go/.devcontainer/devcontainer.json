@@ -1,9 +1,15 @@
 {
   "name": "Go 1.23",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+
+  // Option 1: Use pre-built image (recommended, faster)
+  "image": "ghcr.io/liuxpng/devcontainer-go:latest",
+
+  // Option 2: Build locally (uncomment below, comment out "image" above)
+  // "build": {
+  //   "dockerfile": "Dockerfile",
+  //   "context": "."
+  // },
+
   "features": {},
   "customizations": {
     "vscode": {
