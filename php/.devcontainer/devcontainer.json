@@ -29,7 +29,7 @@
   },
   "forwardPorts": [80, 9003],
   "postCreateCommand": "composer install --ignore-platform-reqs 2>/dev/null || true",
-  "postStartCommand": "sudo service nginx start",
+  "postStartCommand": "sudo service nginx start && sudo php-fpm -D",
   "remoteUser": "vscode",
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
