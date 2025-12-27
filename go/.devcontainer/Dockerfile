@@ -39,16 +39,16 @@ ENV PATH="${GOPATH}/bin:${PATH}"
 ENV GO111MODULE=on
 ENV GOPROXY=https://proxy.golang.org,direct
 
-# Install Go development tools
-RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest \
-    && go install github.com/go-delve/delve/cmd/dlv@latest \
-    && go install golang.org/x/tools/gopls@latest \
-    && go install github.com/air-verse/air@latest \
-    && go install go.uber.org/mock/mockgen@latest \
-    && go install github.com/swaggo/swag/cmd/swag@latest \
-    && go install golang.org/x/tools/cmd/goimports@latest \
-    && go install github.com/fatih/gomodifytags@latest \
-    && go install github.com/cweill/gotests/gotests@latest
+# Install Go development tools (split for better error handling)
+RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+RUN go install golang.org/x/tools/gopls@latest
+RUN go install github.com/cosmtrek/air@latest
+RUN go install go.uber.org/mock/mockgen@latest
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN go install github.com/fatih/gomodifytags@latest
+RUN go install github.com/cweill/gotests/gotests@latest
 
 # Create non-root user
 ARG USERNAME=vscode
