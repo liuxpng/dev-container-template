@@ -1,12 +1,16 @@
 #!/bin/bash
 set -e
 
+# Increase composer process timeout (default is 300s)
+export COMPOSER_PROCESS_TIMEOUT=900
+
 echo "Initializing Laravel project..."
 
 # Check if Laravel is already installed
 if [ -f "artisan" ]; then
     echo "Laravel already installed, running composer install..."
-    composer install
+    composer install --no-scripts
+    php artisan package:discover --ansi || true
 
     # Generate key if .env exists but APP_KEY is empty
     if [ -f ".env" ] && grep -q "APP_KEY=$" .env; then
@@ -16,7 +20,7 @@ else
     echo "Creating new Laravel project..."
 
     # Create Laravel project in current directory
-    composer create-project laravel/laravel tmp --prefer-dist
+    composer create-project laravel/laravel tmp --prefer-dist --no-scripts
 
     # Move files from tmp to workspace root
     shopt -s dotglob
